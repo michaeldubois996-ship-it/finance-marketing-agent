@@ -1,0 +1,33 @@
+# 💰 Finance Marketing Agent
+‎
+‎An AI-powered marketing agent that generates professional TikTok and Facebook posts for your finance digital products.
+‎
+‎## 🚀 Quick Start
+‎
+‎1. Clone: `git clone https://github.com/michaeldubois996-ship-it/finance-marketing-agent.git`
+‎2. Install: `pip install -r requirements.txt`
+‎3. Setup: `cp .env.example .env` and add your OpenAI API key
+‎4. Run: `python main.py`
+‎
+‎## 📱 Features
+‎
+‎✅ AI-powered post generation (GPT-4)
+‎✅ TikTok & Facebook optimized
+‎✅ 15+ pre-built finance topics
+‎✅ Professional, educational tone
+‎✅ Batch generation (1-20 posts)
+‎✅ Interactive CLI
+‎
+‎## 💡 Available Topics
+‎
+‎- Emergency Fund Basics
+‎- Compound Interest Power
+‎- Passive Income Streams
+‎- Investment Fundamentals
+‎- Debt Management
+‎- And 10+ more...
+‎
+‎---
+‎
+‎Built for 20s-40s professionals wanting to build wealth systematically!
+‎
