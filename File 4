@@ -1,0 +1,77 @@
+import os
+‎from openai import OpenAI
+‎from dotenv import load_dotenv
+‎
+‎load_dotenv()
+‎
+‎class FinanceMarketingAgent:
+‎    def __init__(self, api_key=None):
+‎        self.api_key = api_key or os.getenv("OPENAI_API_KEY")
+‎        self.client = OpenAI(api_key=self.api_key)
+‎        self.model = "gpt-4"
+‎        
+‎    def generate_posts_batch(self, platform="both", count=5):
+‎        """Generate batch of posts for specified platform"""
+‎        results = {}
+‎        
+‎        if platform in ["tiktok", "both"]:
+‎            results["tiktok"] = [
+‎                self._generate_single_post("tiktok", topic)
+‎                for topic in self._get_topics()[:count]
+‎            ]
+‎        
+‎        if platform in ["facebook", "both"]:
+‎            results["facebook"] = [
+‎                self._generate_single_post("facebook", topic)
+‎                for topic in self._get_topics()[:count]
+‎            ]
+‎        
+‎        return results
+‎    
+‎    def _generate_single_post(self, platform, topic):
+‎        """Generate a single post"""
+‎        prompt = self._build_prompt(platform, topic)
+‎        
+‎        response = self.client.chat.completions.create(
+‎            model=self.model,
+‎            messages=[
+‎                {"role": "system", "content": "You are a professional finance marketing expert creating educational posts for 20s-40s professionals seeking wealth building."},
+‎                {"role": "user", "content": prompt}
+‎            ],
+‎            temperature=0.7,
+‎            max_tokens=300
+‎        )
+‎        
+‎        return {
+‎            "topic": topic,
+‎            "platform": platform,
+‎            "content": response.choices[0].message.content.strip()
+‎        }
+‎    
+‎    def _build_prompt(self, platform, topic):
+‎        """Build platform-specific prompt"""
+‎        if platform == "tiktok":
+‎            return f"""Create a TikTok post about '{topic}'.
+‎Requirements: Max 150 chars, hook-first, 5 hashtags, professional tone."""
+‎        else:
+‎            return f"""Create a Facebook post about '{topic}'.
+‎Requirements: 200-300 chars, educational, 3 hashtags, professional tone."""
+‎    
+‎    def _get_topics(self):
+‎        return [
+‎            "Emergency Fund Basics",
+‎            "Compound Interest Power",
+‎            "Passive Income Streams",
+‎            "Investment Fundamentals",
+‎            "Debt Management",
+‎            "Budget Mastery",
+‎            "Retirement Planning",
+‎            "Side Hustle Ideas",
+‎            "Financial Goals",
+‎            "Tax Optimization",
+‎            "Real Estate Investing",
+‎            "Cryptocurrency Basics",
+‎            "Insurance Planning",
+‎            "Wealth Mindset",
+‎            "Negotiation Skills"
+‎        ]
