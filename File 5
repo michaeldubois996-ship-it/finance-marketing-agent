@@ -1,0 +1,47 @@
+from agent import FinanceMarketingAgent
+‎import os
+‎
+‎def main():
+‎    print("\n" + "="*60)
+‎    print("💰 FINANCE MARKETING AGENT - POST GENERATOR")
+‎    print("="*60 + "\n")
+‎    
+‎    agent = FinanceMarketingAgent()
+‎    
+‎    while True:
+‎        print("1. Generate TikTok Posts")
+‎        print("2. Generate Facebook Posts")
+‎        print("3. Generate Both")
+‎        print("4. Exit\n")
+‎        
+‎        choice = input("Select option (1-4): ").strip()
+‎        
+‎        if choice == "4":
+‎            print("Goodbye! 👋\n")
+‎            break
+‎        
+‎        if choice in ["1", "2", "3"]:
+‎            count = int(input("How many posts? (1-20): "))
+‎            
+‎            if choice == "1":
+‎                posts = agent.generate_posts_batch("tiktok", count)
+‎                print("\n📱 TIKTOK POSTS:\n")
+‎                for i, post in enumerate(posts["tiktok"], 1):
+‎                    print(f"{i}. {post['topic']}\n{post['content']}\n")
+‎            elif choice == "2":
+‎                posts = agent.generate_posts_batch("facebook", count)
+‎                print("\n📘 FACEBOOK POSTS:\n")
+‎                for i, post in enumerate(posts["facebook"], 1):
+‎                    print(f"{i}. {post['topic']}\n{post['content']}\n")
+‎            else:
+‎                posts = agent.generate_posts_batch("both", count)
+‎                print("\n📱 TIKTOK POSTS:\n")
+‎                for i, post in enumerate(posts["tiktok"], 1):
+‎                    print(f"{i}. {post['topic']}\n{post['content']}\n")
+‎                print("\n📘 FACEBOOK POSTS:\n")
+‎                for i, post in enumerate(posts["facebook"], 1):
+‎                    print(f"{i}. {post['topic']}\n{post['content']}\n")
+‎
+‎if __name__ == "__main__":
+‎    main()
+‎
